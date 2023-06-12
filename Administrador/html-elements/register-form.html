@@ -1,0 +1,31 @@
+<form id="register-form">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" placeholder="Nombre Completo" name="name">
+        <label for="floatingInput">Nombre Completo</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="user" placeholder="Nombre de Usuario" name="user">
+        <label for="floatingInput">Nombre de Usuario</label>
+    	<div class="invalid-feedback" id="user_error">
+            El nombre de usuario ya está en uso
+        </div>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="mail" name="mail" placeholder="Correo Electrónico">
+        <label for="floatingInput">Correo Electrónico</label>
+        <div class="invalid-feedback" id="mail_error">
+            Este correo electrónico ya está en uso
+        </div>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="pass" name="pass" placeholder="Contraseña">
+        <label for="floatingInput">Contraseña</label>
+    </div>
+    <div class="input-group mb-3 mt-3">
+      <label class="input-group-text" for="inputGroupSelect01">Tipo</label>
+      <select class="form-select" id="tipo" name="tipo" required>
+        <option value="administrador">Administrador</option>
+        <option value="cliente">Cliente</option>
+      </select>
+    </div>      
+</form>

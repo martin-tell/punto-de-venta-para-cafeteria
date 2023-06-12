@@ -1,0 +1,84 @@
+CREATE TABLE Usuario (
+  id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+  nombre_de_pila VARCHAR(128),
+  nombre_usuario VARCHAR(64),
+  correo_electronico VARCHAR(128),
+  contrasena VARCHAR(128),
+  rol ENUM('cliente', 'administrador')
+);
+
+CREATE TABLE Pedido (
+  id_pedido INT PRIMARY KEY AUTO_INCREMENT,
+  id_usuario INT,
+  fecha DATE,
+  hora TIME,
+  total DECIMAL(10,2),
+  estado ENUM('En espera', 'En preparación', 'En camino', 'Entregado', 'Cancelado', 'Agregando productos') DEFAULT 'Agregando productos',
+  direccion_entrega VARCHAR(100),
+  metodo_pago ENUM('Efectivo', 'Credito', 'Debito'),
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+CREATE TABLE Producto (
+  id_producto INT PRIMARY KEY AUTO_INCREMENT,
+  nombre_producto VARCHAR(100),
+  precio DECIMAL(10,2),
+  descripcion VARCHAR(200),
+  categoria VARCHAR(50),
+  imagen VARCHAR(100),
+  disponibilidad BOOLEAN
+);
+
+CREATE TABLE ProductoPedido (
+  id_producto_pedido INT PRIMARY KEY AUTO_INCREMENT,
+  id_pedido INT,
+  id_producto INT,
+  cantidad INT,
+  precio_unitario DECIMAL(10,2),
+  FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
+  FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
+);
+
+INSERT INTO Usuario (nombre_de_pila, nombre_usuario, correo_electronico, contrasena, rol) VALUES ('Mark Zuckerberg', 'admin1', 'admin1@example.com', 'admin123', 'administrador');
+INSERT INTO Usuario (nombre_de_pila, nombre_usuario, correo_electronico, contrasena, rol) VALUES ('Elon Musk', 'admin2', 'admin2@example.com', 'admin456', 'administrador');
+INSERT INTO Usuario (nombre_de_pila, nombre_usuario, correo_electronico, contrasena, rol) VALUES ('Juan Perez', 'juan123', 'juan@example.com', 'contrasena123', 'cliente');
+INSERT INTO Usuario (nombre_de_pila, nombre_usuario, correo_electronico, contrasena, rol) VALUES ('Maria Lopez', 'maria456', 'maria@example.com', '12345678', 'cliente');
+INSERT INTO Usuario (nombre_de_pila, nombre_usuario, correo_electronico, contrasena, rol) VALUES ('Pedro Ramirez', 'pedro789', 'pedro@example.com', 'password123', 'cliente');
+INSERT INTO Usuario (nombre_de_pila, nombre_usuario, correo_electronico, contrasena, rol) VALUES ('Laura Martinez', 'laura321', 'laura@example.com', 'securepassword', 'cliente');
+INSERT INTO Usuario (nombre_de_pila, nombre_usuario, correo_electronico, contrasena, rol) VALUES ('Carlos Sanchez', 'carlos555', 'carlos@example.com', 'mysecretpassword', 'cliente');
+INSERT INTO Usuario (nombre_de_pila, nombre_usuario, correo_electronico, contrasena, rol) VALUES ('Ana Garcia', 'ana222', 'ana@example.com', 'password1234', 'cliente');
+INSERT INTO Usuario (nombre_de_pila, nombre_usuario, correo_electronico, contrasena, rol) VALUES ('Jorge Torres', 'jorge777', 'jorge@example.com', 'password123', 'cliente');
+INSERT INTO Usuario (nombre_de_pila, nombre_usuario, correo_electronico, contrasena, rol) VALUES ('Marcela Diaz', 'marce444', 'marcela@example.com', 'marcelapass', 'cliente');
+INSERT INTO Usuario (nombre_de_pila, nombre_usuario, correo_electronico, contrasena, rol) VALUES ('Luisa Lopez', 'luisa888', 'luisa@example.com', 'pass123456', 'cliente');
+INSERT INTO Usuario (nombre_de_pila, nombre_usuario, correo_electronico, contrasena, rol) VALUES ('Pablo Rodriguez', 'pablo999', 'pablo@example.com', 'mypassword', 'cliente');
+
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Café americano', 25.00, 'Café negro sin azúcar', 'desayuno', 'cafe_americano.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Tostadas de aguacate', 55.00, 'Tostadas con aguacate fresco', 'desayuno', 'tostadas_aguacate.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Hamburguesa clásica', 89.90, 'Carne jugosa con queso y vegetales', 'almuerzo', 'hamburguesa_clasica.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Ensalada César', 75.00, 'Lechuga, pollo a la parrilla, croutones y aderezo César', 'almuerzo', 'ensalada_cesar.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Espaguetis a la bolognesa', 95.00, 'Pasta con salsa de carne y tomate', 'comida', 'espaguetis_bolognesa.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Tarta de manzana', 49.90, 'Deliciosa tarta casera de manzana', 'postre', 'tarta_manzana.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Smoothie de frutas', 39.90, 'Mezcla refrescante de frutas frescas', 'bebida', 'smoothie_frutas.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Papas fritas', 25.00, 'Papas fritas crujientes', 'botana', 'papas_fritas.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Croissant de jamón y queso', 45.00, 'Delicioso croissant relleno de jamón y queso', 'desayuno', 'croissant_jamon_queso.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Sopa de pollo', 65.00, 'Caldo de pollo con verduras', 'almuerzo', 'sopa_pollo.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Pollo a la parrilla', 109.90, 'Pechuga de pollo a la parrilla con papas asadas', 'comida', 'pollo_parrilla.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Pastel de chocolate', 79.90, 'Irresistible pastel de chocolate con glaseado y fresas', 'postre', 'pastel_chocolate.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Café con leche', 35.00, 'Café con leche caliente', 'desayuno', 'cafe_con_leche.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Wrap de pollo', 69.90, 'Wrap de pollo a la parrilla con vegetales frescos', 'almuerzo', 'wrap_pollo.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Pizza Margarita', 105.00, 'Pizza clásica con tomate, mozzarella y albahaca', 'comida', 'pizza_margarita.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Flan de caramelo', 55.00, 'Flan suave con salsa de caramelo', 'postre', 'flan_caramelo.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Refresco de cola', 20.00, 'Bebida gaseosa de cola', 'bebida', 'refresco_cola.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Palomitas de maíz', 35.00, 'Palomitas de maíz saladas', 'botana', 'palomitas_maiz.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Panqueques de arándanos', 49.90, 'Deliciosos panqueques con arándanos y sirope de maple', 'desayuno', 'panqueques_arandanos.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Ensalada mixta', 65.00, 'Ensalada fresca con una mezcla de vegetales', 'almuerzo', 'ensalada_mixta.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Lasaña de carne', 85.00, 'Lasaña con capas de carne molida y salsa de tomate', 'comida', 'lasana_carne.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Cheesecake de fresa', 69.90, 'Cheesecake con topping de fresas frescas', 'postre', 'cheesecake_fresa.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Zumo de naranja', 35.00, 'Zumo natural de naranja recién exprimido', 'bebida', 'zumo_naranja.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Nachos con queso', 45.00, 'Nachos crujientes con salsa de queso derretido', 'botana', 'nachos_queso.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Croissant de chocolate', 45.00, 'Delicioso croissant relleno de crema de chocolate', 'postre', 'croissant_chocolate.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Huevos revueltos', 55.00, 'Huevos revueltos con tocino y pan tostado', 'desayuno', 'huevos_revueltos.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Sándwich de pollo', 69.90, 'Sándwich de pollo a la parrilla con aderezo especial', 'almuerzo', 'sandwich_pollo.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Sushi variado', 125.00, 'Selección de sushi variado con salsa de soja', 'comida', 'sushi_variado.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Tiramisú', 65.00, 'Postre italiano de capas de bizcocho y crema de mascarpone', 'postre', 'tiramisu.jpg', true);
+INSERT INTO Producto (nombre_producto, precio, descripcion, categoria, imagen, disponibilidad) VALUES ('Agua mineral', 15.00, 'Agua mineral sin gas', 'bebida', 'agua_mineral.jpg', true);

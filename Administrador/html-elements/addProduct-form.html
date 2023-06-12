@@ -1,0 +1,42 @@
+<form id="form-addProduct" enctype="multipart/form-data">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="nombre" name="name" required>
+        <label for="floatingInput">Nombre del Producto</label>
+        <div class="invalid-feedback" id="name_error">
+            No puede repetir los nombres de los productos 
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text">Descripción</span>
+        <textarea class="form-control" name="desc" id="descripcion" required></textarea>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="precio" name="price" required>
+        <label for="floatingInput">Precio</label>
+    </div>
+    <div id="miniaturaContainer" style="width: 200px; height: 200px; border: 1px solid #ccc; display: none; justify-content: center; align-items: center;margin: 0 auto;">
+       <img style="max-width: 100%; max-height: 100%;" id="miniatura" src="#" alt="Imagen del producto" onchange="mostrarMiniatura()" accept="image/*">
+    </div>
+    <input type="file" id="imagenInput" class="form-control mt-2" name="imagen" onchange="mostrarMiniatura()" accept="image/*" required>
+    <div class="invalid-feedback" id="img_error">
+        Error al subir la imagen 
+    </div>
+    <div class="input-group mb-3 mt-3">
+      <label class="input-group-text" for="inputGroupSelect01">Categoría</label>
+      <select class="form-select" id="categoria" name="type" required>
+        <option value="desayuno">Desayuno</option>
+        <option value="almuerzo">Almuerzo</option>
+        <option value="comida">Comida</option>
+        <option value="bebida">Bebida</option>
+        <option value="postre">Postre</option>
+        <option value="botana">Botana</option>
+      </select>
+    </div>
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="inputGroupSelect01">Disponibilidad</label>
+      <select class="form-select" id="disponibilidad" name="avail" required>
+        <option value="1" selected>Sí</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+</form>
